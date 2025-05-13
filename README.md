@@ -1,11 +1,16 @@
 # termux_api
 
-Simple Python module to call [termux-api](https://wiki.termux.com/wiki/Termux:API) by subprocess.  
-I used qpython + sl4a before. This is made to call termux-api in my Python scripts.
+Simple Python module to call [termux-api](https://wiki.termux.com/wiki/Termux:API) by subprocess.
 
 Exception-free module to call termux-api.  
 Most calls return (result, error). Please check error is None. Result is None if not a query.  
-Thin wrapper around termux-api. Function & param names are close to the official wiki.
+Thin wrapper around termux-api. Function & param names are close to the [official wiki](https://wiki.termux.com/wiki/Termux:API).  
+If wiki is not detailed enough, here's the official repos: [termux-api](https://github.com/termux/termux-api), [termux-api-package](https://github.com/termux/termux-api-package).
+
+## Archived
+
+Support most APIs of v0.50.1, but not updated after v0.51.0 is released.  
+(Probably still works for many cases, but please be careful.)
 
 ## Requirements
 
@@ -28,7 +33,7 @@ termux_api.vibrate()
 
 ## APIs
 
-Currently, this supports all API implementations on wiki.  
+Currently, this supports all API implementations on wiki. (v0.50.1)  
 But some are not fully tested, so please use with some caution.
 
 Most functions return (result, error), function and param names are close to the wiki.  
@@ -36,7 +41,7 @@ Function docstrings contain some hints about valid args, or test result of the f
 
 Special functions:
 - Generators yield (result, error): `location(request="updates")`, `sensor()`.
-- `tts_speak_init()` starts a Popen, return `speak(text)` & `close()`.
+- `tts_speak_init()` starts a Popen, then returns 2 functions: `speak(text)` & `close()`.
 
 Some outputs from termux-api are not json, so it's hard to get results programmatically.  
 I tried to read the source code, and parsed most of them:
@@ -52,6 +57,27 @@ I tried to read the source code, and parsed most of them:
 
 These functions' outputs are not parsed. Raw strings are returned:
 - `job_scheduler*()`: looks complicated
+
+### APIs not on wiki
+
+These APIs, which are not listed on the wiki, are not implemented yet:
+```
+termux-audio-info
+termux-keystore
+termux-nfc
+termux-notification-channel
+termux-notification-list
+termux-saf-create
+termux-saf-dirs
+termux-saf-ls
+termux-saf-managedir
+termux-saf-mkdir
+termux-saf-read
+termux-saf-rm
+termux-saf-stat
+termux-saf-write
+termux-speech-to-text
+```
 
 ## Bug report
 

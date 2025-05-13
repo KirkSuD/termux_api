@@ -244,6 +244,11 @@ def dialog_text(title=None, hint=None, multi_line=False, number=False, password=
     return _run_json(args)
 
 
+def dialog_time(title=None):
+    args = _construct_args(["termux-dialog", "time"], {}, {"-t": title})
+    return _run_json(args)
+
+
 def download(url, path=None, title=None, description=None):
     args = _construct_args(
         ["termux-download"], {}, {"-p": path, "-t": title, "-d": description}, [url]
